@@ -44,6 +44,8 @@ namespace JSONist
         public static BPTP ConvertToBPlan_TimingPoint(string? input) => input switch
         {
             null => BPTP.Null,
+            "Null" => BPTP.Null,
+            "Asterisk" => BPTP.Asterisk,
             "*" => BPTP.Asterisk,
             "Mandatory" => BPTP.Mandatory,
             "Optional" => BPTP.Optional,
@@ -63,6 +65,8 @@ namespace JSONist
         public static StationType ConvertToTPS_StationType(string? input) => input switch
         {
             null => StationType.Null,
+            "Null" => StationType.Null,
+            "Asterisk" => StationType.Asterisk,
             "*" => StationType.Asterisk,
             "ExtraTriploc" => StationType.ExtraTriploc,
             "Maintenance" => StationType.Maintenance,
@@ -103,6 +107,8 @@ namespace JSONist
         {
             null => StationCategory.Null,
             "*" => StationCategory.Asterisk,
+            "Null" => StationCategory.Null,
+            "Asterisk" => StationCategory.Asterisk,
             "CrossingOnly" => StationCategory.CrossingOnly,
             "EngineeringLocation" => StationCategory.EngineeringLocation,
             "FreightYard" => StationCategory.FreightYard,
@@ -142,6 +148,8 @@ namespace JSONist
         {
             null => ForceLPB.NotSet,
             "*" => ForceLPB.Asterisk,
+            "Null" => ForceLPB.NotSet,
+            "Asterisk" => ForceLPB.Asterisk,
             "B" => ForceLPB.B,
             "L" => ForceLPB.L,
             "P" => ForceLPB.P,
