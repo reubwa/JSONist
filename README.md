@@ -6,3 +6,4 @@ Supports a number of features, including LINQ querying at runtime. The entire LI
 ```
 Tiplocs.Where(t => t.Details.CRS != null && t.Details.CRS.StartsWith("M"))
 ```
+For a list of queriable properties, refer to [this class](TIPLOCSchemaProvider.cs)
