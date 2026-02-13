@@ -41,16 +41,22 @@
             outputToolStripMenuItem = new ToolStripMenuItem();
             clearToolStripMenuItem = new ToolStripMenuItem();
             exportToTextFileToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator1 = new ToolStripSeparator();
+            jumpToToolStripMenuItem = new ToolStripMenuItem();
             sortToolStripMenuItem = new ToolStripMenuItem();
             alphabeticallyToolStripMenuItem = new ToolStripMenuItem();
             openFileDialog1 = new OpenFileDialog();
             listBox1 = new ListBox();
+            contextMenuStrip1 = new ContextMenuStrip(components);
+            inspectToolStripMenuItem = new ToolStripMenuItem();
+            viewAssociatedCodesToolStripMenuItem = new ToolStripMenuItem();
             saveFileDialog1 = new SaveFileDialog();
             statusStrip1 = new StatusStrip();
             fileNameLabel = new ToolStripStatusLabel();
             itemLengthLabel = new ToolStripStatusLabel();
             timer1 = new System.Windows.Forms.Timer(components);
             menuStrip1.SuspendLayout();
+            contextMenuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -61,7 +67,7 @@
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(11, 4, 0, 4);
-            menuStrip1.Size = new Size(1486, 44);
+            menuStrip1.Size = new Size(2292, 44);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -69,8 +75,8 @@
             // 
             fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openToolStripMenuItem });
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            fileToolStripMenuItem.Size = new Size(71, 36);
-            fileToolStripMenuItem.Text = "&File";
+            fileToolStripMenuItem.Size = new Size(90, 36);
+            fileToolStripMenuItem.Text = "&Input";
             // 
             // openToolStripMenuItem
             // 
@@ -98,7 +104,7 @@
             // 
             arraysToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { codesToolStripMenuItem });
             arraysToolStripMenuItem.Name = "arraysToolStripMenuItem";
-            arraysToolStripMenuItem.Size = new Size(212, 44);
+            arraysToolStripMenuItem.Size = new Size(359, 44);
             arraysToolStripMenuItem.Text = "&Arrays";
             // 
             // codesToolStripMenuItem
@@ -111,7 +117,8 @@
             // nameToolStripMenuItem
             // 
             nameToolStripMenuItem.Name = "nameToolStripMenuItem";
-            nameToolStripMenuItem.Size = new Size(212, 44);
+            nameToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Alt | Keys.N;
+            nameToolStripMenuItem.Size = new Size(359, 44);
             nameToolStripMenuItem.Text = "&Name";
             nameToolStripMenuItem.Click += nameToolStripMenuItem_Click;
             // 
@@ -125,7 +132,7 @@
             // 
             // outputToolStripMenuItem
             // 
-            outputToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { clearToolStripMenuItem, exportToTextFileToolStripMenuItem });
+            outputToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { clearToolStripMenuItem, exportToTextFileToolStripMenuItem, toolStripSeparator1, jumpToToolStripMenuItem });
             outputToolStripMenuItem.Name = "outputToolStripMenuItem";
             outputToolStripMenuItem.Size = new Size(110, 36);
             outputToolStripMenuItem.Text = "&Output";
@@ -145,6 +152,19 @@
             exportToTextFileToolStripMenuItem.Size = new Size(417, 44);
             exportToTextFileToolStripMenuItem.Text = "&Export to Text File";
             exportToTextFileToolStripMenuItem.Click += exportToTextFileToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator1
+            // 
+            toolStripSeparator1.Name = "toolStripSeparator1";
+            toolStripSeparator1.Size = new Size(414, 6);
+            // 
+            // jumpToToolStripMenuItem
+            // 
+            jumpToToolStripMenuItem.Name = "jumpToToolStripMenuItem";
+            jumpToToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.J;
+            jumpToToolStripMenuItem.Size = new Size(417, 44);
+            jumpToToolStripMenuItem.Text = "&Jump to";
+            jumpToToolStripMenuItem.Click += jumpToToolStripMenuItem_Click;
             // 
             // sortToolStripMenuItem
             // 
@@ -168,13 +188,37 @@
             // 
             // listBox1
             // 
+            listBox1.ContextMenuStrip = contextMenuStrip1;
             listBox1.Dock = DockStyle.Fill;
             listBox1.FormattingEnabled = true;
             listBox1.Location = new Point(0, 44);
             listBox1.Margin = new Padding(6);
             listBox1.Name = "listBox1";
-            listBox1.Size = new Size(1486, 916);
+            listBox1.Size = new Size(2292, 1079);
             listBox1.TabIndex = 1;
+            // 
+            // contextMenuStrip1
+            // 
+            contextMenuStrip1.ImageScalingSize = new Size(32, 32);
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { inspectToolStripMenuItem, viewAssociatedCodesToolStripMenuItem });
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new Size(480, 80);
+            // 
+            // inspectToolStripMenuItem
+            // 
+            inspectToolStripMenuItem.Name = "inspectToolStripMenuItem";
+            inspectToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Shift | Keys.I;
+            inspectToolStripMenuItem.Size = new Size(479, 38);
+            inspectToolStripMenuItem.Text = "&Inspect";
+            inspectToolStripMenuItem.Click += inspectToolStripMenuItem_Click;
+            // 
+            // viewAssociatedCodesToolStripMenuItem
+            // 
+            viewAssociatedCodesToolStripMenuItem.Name = "viewAssociatedCodesToolStripMenuItem";
+            viewAssociatedCodesToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Shift | Keys.V;
+            viewAssociatedCodesToolStripMenuItem.Size = new Size(479, 38);
+            viewAssociatedCodesToolStripMenuItem.Text = "&View Associated Codes";
+            viewAssociatedCodesToolStripMenuItem.Click += viewAssociatedCodesToolStripMenuItem_Click;
             // 
             // saveFileDialog1
             // 
@@ -184,9 +228,9 @@
             // 
             statusStrip1.ImageScalingSize = new Size(32, 32);
             statusStrip1.Items.AddRange(new ToolStripItem[] { fileNameLabel, itemLengthLabel });
-            statusStrip1.Location = new Point(0, 938);
+            statusStrip1.Location = new Point(0, 1101);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(1486, 22);
+            statusStrip1.Size = new Size(2292, 22);
             statusStrip1.TabIndex = 2;
             statusStrip1.Text = "statusStrip1";
             // 
@@ -208,7 +252,7 @@
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1486, 960);
+            ClientSize = new Size(2292, 1123);
             Controls.Add(statusStrip1);
             Controls.Add(listBox1);
             Controls.Add(menuStrip1);
@@ -218,6 +262,7 @@
             Text = "JSONist";
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
+            contextMenuStrip1.ResumeLayout(false);
             statusStrip1.ResumeLayout(false);
             statusStrip1.PerformLayout();
             ResumeLayout(false);
@@ -247,5 +292,10 @@
         private System.Windows.Forms.Timer timer1;
         private ToolStripMenuItem sortToolStripMenuItem;
         private ToolStripMenuItem alphabeticallyToolStripMenuItem;
+        private ContextMenuStrip contextMenuStrip1;
+        private ToolStripMenuItem inspectToolStripMenuItem;
+        private ToolStripMenuItem viewAssociatedCodesToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripMenuItem jumpToToolStripMenuItem;
     }
 }

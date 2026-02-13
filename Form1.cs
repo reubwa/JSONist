@@ -1,3 +1,4 @@
+using Microsoft.VisualBasic;
 using System.Text.Json;
 
 namespace JSONist
@@ -54,6 +55,11 @@ namespace JSONist
 
         private void codesToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (loadedFile == null || loadedFile.Tiplocs == null)
+            {
+                MessageBox.Show("No file loaded.");
+                return;
+            }
             this.Cursor = Cursors.WaitCursor;
             listBox1.Items.Clear();
             foreach (var tl in loadedFile.Tiplocs)
@@ -72,6 +78,11 @@ namespace JSONist
 
         private void exportToTextFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (loadedFile == null || loadedFile.Tiplocs == null)
+            {
+                MessageBox.Show("No file loaded.");
+                return;
+            }
             saveFileDialog1.Filter = "Text Files (*.txt)|*.txt";
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -81,6 +92,11 @@ namespace JSONist
 
         private void nameToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (loadedFile == null || loadedFile.Tiplocs == null)
+            {
+                MessageBox.Show("No file loaded.");
+                return;
+            }
             this.Cursor = Cursors.WaitCursor;
             listBox1.Items.Clear();
             foreach (var tl in loadedFile.Tiplocs)
@@ -95,6 +111,11 @@ namespace JSONist
 
         private void findMatchesToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (loadedFile == null || loadedFile.Tiplocs == null)
+            {
+                MessageBox.Show("No file loaded.");
+                return;
+            }
             var fmd = new FindMatchesDlg();
             fmd.ShowDialog();
             if (fmd.DialogResult != DialogResult.OK)
@@ -111,7 +132,7 @@ namespace JSONist
                         listBox1.Items.Clear();
                         foreach (var tl in loadedFile.Tiplocs)
                         {
-                            if (tl.Stanox == (int?)res.Value)
+                            if (tl.Stanox == (res.Value is null ? null : int.Parse((String)res.Value)))
                             {
                                 listBox1.Items.Add(tl.Name);
                             }
@@ -145,7 +166,7 @@ namespace JSONist
                         listBox1.Items.Clear();
                         foreach (var tl in loadedFile.Tiplocs)
                         {
-                            if (tl.Details.Nalco == (int?)res.Value)
+                            if (tl.Details.Nalco == (res.Value is null ? null : int.Parse((String)res.Value)))
                             {
                                 listBox1.Items.Add(tl.Name);
                             }
@@ -162,7 +183,7 @@ namespace JSONist
                         listBox1.Items.Clear();
                         foreach (var tl in loadedFile.Tiplocs)
                         {
-                            if (tl.Details.UIC == (int?)res.Value)
+                            if (tl.Details.UIC == (res.Value is null ? null : int.Parse((String)res.Value)))
                             {
                                 listBox1.Items.Add(tl.Name);
                             }
@@ -179,7 +200,7 @@ namespace JSONist
                         listBox1.Items.Clear();
                         foreach (var tl in loadedFile.Tiplocs)
                         {
-                            if (tl.Details.Zone == (int?)res.Value)
+                            if (tl.Details.Zone == (res.Value is null ? null : int.Parse((String)res.Value)))
                             {
                                 listBox1.Items.Add(tl.Name);
                             }
@@ -277,7 +298,74 @@ namespace JSONist
             else
             {
                 alphabeticallyToolStripMenuItem.Checked = true;
-                
+
+            }
+        }
+
+        private void inspectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (loadedFile == null || loadedFile.Tiplocs == null)
+            {
+                MessageBox.Show("No file loaded.");
+                return;
+            }
+            if (listBox1.SelectedIndex != -1)
+            {
+                TIPLOCSchemaProvider.TIPLOCObject selected;
+                foreach (var tl in loadedFile.Tiplocs)
+                {
+                    if (tl.Name == (string)listBox1.SelectedItem)
+                    {
+                        MessageBox.Show($"TIPLOC: {tl.Tiploc}\n Stanox: {tl.Stanox}\n InBPlan: {tl.InBPlan}\n InTPS: {tl.InTPS}\n IsTIPLOC: {tl.IsTiploc}\n Latitude: {tl.Latitude}\n Longitude: {tl.Longitude}\n BPlan_TimingPoint: {tl.Details.BPlan_TimingPoint}\n TPS_StationType: {tl.Details.TPS_StationType}\n TPS_StationCategory: {tl.Details.TPS_StationCategory}\n CRS: {tl.Details.CRS}\n Nalco: {tl.Details.Nalco}\n Off Network: {tl.Details.OffNetwork}\n ForceLPB: {tl.Details.ForceLPB}\n Compulsory Stop: {tl.Details.CompulsoryStop}\n UIC: {tl.Details.UIC}\n Zone: {tl.Details.Zone}", $"Inspecting: {tl.Name}");
+                    }
+                }
+            }
+        }
+
+        private void viewAssociatedCodesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (loadedFile == null || loadedFile.Tiplocs == null)
+            {
+                MessageBox.Show("No file loaded.");
+                return;
+            }
+            if (listBox1.SelectedIndex != -1)
+            {
+                TIPLOCSchemaProvider.TIPLOCObject selected;
+                string codes = "";
+                foreach (var tl in loadedFile.Tiplocs)
+                {
+                    if (tl.Name == (string)listBox1.SelectedItem)
+                    {
+                        foreach (var code in tl.Codes)
+                        {
+                            codes += $"{code}\n";
+                        }
+                        MessageBox.Show(codes, $"Codes Associated with {tl.Name}");
+                    }
+                }
+            }
+        }
+
+        private void jumpToToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (loadedFile == null || loadedFile.Tiplocs == null)
+            {
+                MessageBox.Show("No file loaded.");
+                return;
+            }
+            string input = Interaction.InputBox("Enter a value (exactly as it is displayed in the output area)", "Jump To");
+            if (!string.IsNullOrEmpty(input))
+            {
+                if (listBox1.Items.Contains(input))
+                {
+                    listBox1.SelectedIndex = listBox1.Items.IndexOf(input);
+                    listBox1.Focus();
+                }
+                else
+                {
+                    MessageBox.Show("Item not found!");
+                }
             }
         }
     }

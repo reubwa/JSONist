@@ -16,7 +16,7 @@ namespace JSONist
         public class TIPLOCObject
         {
             public string Name;
-            public string Triploc;
+            public string Tiploc;
             public int? Stanox;
             public bool InBPlan;
             public bool InTPS;
