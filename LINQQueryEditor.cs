@@ -75,5 +75,16 @@ namespace JSONist
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
+
+        private void LINQQueryEditor_Load(object sender, EventArgs e)
+        {
+            timer1.Enabled = true;
+            timer1.Start();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = $"{listBox1.Items.Count} Items Visible";
+        }
     }
 }

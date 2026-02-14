@@ -29,17 +29,18 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
             openToolStripMenuItem = new ToolStripMenuItem();
             schemaToolStripMenuItem = new ToolStripMenuItem();
             loadToolStripMenuItem = new ToolStripMenuItem();
-            arraysToolStripMenuItem = new ToolStripMenuItem();
-            codesToolStripMenuItem = new ToolStripMenuItem();
+            toolStripMenuItem1 = new ToolStripMenuItem();
             toolStripSeparator2 = new ToolStripSeparator();
             nameToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator3 = new ToolStripSeparator();
             findMatchesToolStripMenuItem = new ToolStripMenuItem();
+            hasCodeToolStripMenuItem = new ToolStripMenuItem();
             sortToolStripMenuItem = new ToolStripMenuItem();
             alphabeticallyToolStripMenuItem = new ToolStripMenuItem();
             outputToolStripMenuItem = new ToolStripMenuItem();
@@ -49,20 +50,26 @@
             clearToolStripMenuItem = new ToolStripMenuItem();
             lINQQueryEditorToolStripMenuItem = new ToolStripMenuItem();
             openFileDialog1 = new OpenFileDialog();
-            listBox1 = new ListBox();
             contextMenuStrip1 = new ContextMenuStrip(components);
             inspectToolStripMenuItem = new ToolStripMenuItem();
             viewAssociatedCodesToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator5 = new ToolStripSeparator();
             copyAssociatedCodesToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator4 = new ToolStripSeparator();
+            showItemsWithSameZoneToolStripMenuItem = new ToolStripMenuItem();
             saveFileDialog1 = new SaveFileDialog();
             statusStrip1 = new StatusStrip();
             fileNameLabel = new ToolStripStatusLabel();
             itemLengthLabel = new ToolStripStatusLabel();
             timer1 = new System.Windows.Forms.Timer(components);
+            toolStrip1 = new ToolStrip();
+            toolStripTextBox1 = new ToolStripTextBox();
+            toolStripButton1 = new ToolStripButton();
+            listBox1 = new ListBox();
             menuStrip1.SuspendLayout();
             contextMenuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
+            toolStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
@@ -93,43 +100,36 @@
             // 
             // schemaToolStripMenuItem
             // 
-            schemaToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { loadToolStripMenuItem, toolStripSeparator3, findMatchesToolStripMenuItem });
+            schemaToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { loadToolStripMenuItem, toolStripSeparator3, findMatchesToolStripMenuItem, hasCodeToolStripMenuItem });
             schemaToolStripMenuItem.Name = "schemaToolStripMenuItem";
             schemaToolStripMenuItem.Size = new Size(87, 36);
             schemaToolStripMenuItem.Text = "&Filter";
             // 
             // loadToolStripMenuItem
             // 
-            loadToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { arraysToolStripMenuItem, toolStripSeparator2, nameToolStripMenuItem });
+            loadToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { toolStripMenuItem1, toolStripSeparator2, nameToolStripMenuItem });
             loadToolStripMenuItem.Name = "loadToolStripMenuItem";
             loadToolStripMenuItem.Size = new Size(369, 44);
             loadToolStripMenuItem.Text = "&Load";
             // 
-            // arraysToolStripMenuItem
+            // toolStripMenuItem1
             // 
-            arraysToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { codesToolStripMenuItem });
-            arraysToolStripMenuItem.Name = "arraysToolStripMenuItem";
-            arraysToolStripMenuItem.Size = new Size(359, 44);
-            arraysToolStripMenuItem.Text = "&Arrays";
-            // 
-            // codesToolStripMenuItem
-            // 
-            codesToolStripMenuItem.Name = "codesToolStripMenuItem";
-            codesToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Alt | Keys.C;
-            codesToolStripMenuItem.Size = new Size(359, 44);
-            codesToolStripMenuItem.Text = "&Codes";
-            codesToolStripMenuItem.Click += codesToolStripMenuItem_Click;
+            toolStripMenuItem1.Name = "toolStripMenuItem1";
+            toolStripMenuItem1.ShortcutKeys = Keys.Control | Keys.Alt | Keys.C;
+            toolStripMenuItem1.Size = new Size(341, 44);
+            toolStripMenuItem1.Text = "&Codes";
+            toolStripMenuItem1.Click += toolStripMenuItem1_Click;
             // 
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(356, 6);
+            toolStripSeparator2.Size = new Size(338, 6);
             // 
             // nameToolStripMenuItem
             // 
             nameToolStripMenuItem.Name = "nameToolStripMenuItem";
             nameToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Alt | Keys.N;
-            nameToolStripMenuItem.Size = new Size(359, 44);
+            nameToolStripMenuItem.Size = new Size(341, 44);
             nameToolStripMenuItem.Text = "&Name";
             nameToolStripMenuItem.Click += nameToolStripMenuItem_Click;
             // 
@@ -145,6 +145,14 @@
             findMatchesToolStripMenuItem.Size = new Size(369, 44);
             findMatchesToolStripMenuItem.Text = "&Find Matches";
             findMatchesToolStripMenuItem.Click += findMatchesToolStripMenuItem_Click;
+            // 
+            // hasCodeToolStripMenuItem
+            // 
+            hasCodeToolStripMenuItem.Name = "hasCodeToolStripMenuItem";
+            hasCodeToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.H;
+            hasCodeToolStripMenuItem.Size = new Size(369, 44);
+            hasCodeToolStripMenuItem.Text = "&Has Code";
+            hasCodeToolStripMenuItem.Click += hasCodeToolStripMenuItem_Click;
             // 
             // sortToolStripMenuItem
             // 
@@ -210,52 +218,54 @@
             openFileDialog1.Filter = "JSON files|*.json|All files|*.*";
             openFileDialog1.Title = "Choose a JSON File";
             // 
-            // listBox1
-            // 
-            listBox1.ContextMenuStrip = contextMenuStrip1;
-            listBox1.Dock = DockStyle.Fill;
-            listBox1.FormattingEnabled = true;
-            listBox1.Location = new Point(0, 44);
-            listBox1.Margin = new Padding(6);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(2292, 1079);
-            listBox1.TabIndex = 1;
-            // 
             // contextMenuStrip1
             // 
             contextMenuStrip1.ImageScalingSize = new Size(32, 32);
-            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { inspectToolStripMenuItem, viewAssociatedCodesToolStripMenuItem, toolStripSeparator5, copyAssociatedCodesToolStripMenuItem });
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { inspectToolStripMenuItem, viewAssociatedCodesToolStripMenuItem, toolStripSeparator5, copyAssociatedCodesToolStripMenuItem, toolStripSeparator4, showItemsWithSameZoneToolStripMenuItem });
             contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(484, 124);
+            contextMenuStrip1.Size = new Size(431, 168);
             // 
             // inspectToolStripMenuItem
             // 
             inspectToolStripMenuItem.Name = "inspectToolStripMenuItem";
-            inspectToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Shift | Keys.I;
-            inspectToolStripMenuItem.Size = new Size(483, 38);
+            inspectToolStripMenuItem.ShortcutKeys = Keys.F1;
+            inspectToolStripMenuItem.Size = new Size(430, 38);
             inspectToolStripMenuItem.Text = "&Inspect";
             inspectToolStripMenuItem.Click += inspectToolStripMenuItem_Click;
             // 
             // viewAssociatedCodesToolStripMenuItem
             // 
             viewAssociatedCodesToolStripMenuItem.Name = "viewAssociatedCodesToolStripMenuItem";
-            viewAssociatedCodesToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Shift | Keys.V;
-            viewAssociatedCodesToolStripMenuItem.Size = new Size(483, 38);
+            viewAssociatedCodesToolStripMenuItem.ShortcutKeys = Keys.F2;
+            viewAssociatedCodesToolStripMenuItem.Size = new Size(430, 38);
             viewAssociatedCodesToolStripMenuItem.Text = "&View Associated Codes";
             viewAssociatedCodesToolStripMenuItem.Click += viewAssociatedCodesToolStripMenuItem_Click;
             // 
             // toolStripSeparator5
             // 
             toolStripSeparator5.Name = "toolStripSeparator5";
-            toolStripSeparator5.Size = new Size(480, 6);
+            toolStripSeparator5.Size = new Size(427, 6);
             // 
             // copyAssociatedCodesToolStripMenuItem
             // 
             copyAssociatedCodesToolStripMenuItem.Name = "copyAssociatedCodesToolStripMenuItem";
-            copyAssociatedCodesToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Shift | Keys.C;
-            copyAssociatedCodesToolStripMenuItem.Size = new Size(483, 38);
+            copyAssociatedCodesToolStripMenuItem.ShortcutKeys = Keys.F3;
+            copyAssociatedCodesToolStripMenuItem.Size = new Size(430, 38);
             copyAssociatedCodesToolStripMenuItem.Text = "&Copy Associated Codes";
             copyAssociatedCodesToolStripMenuItem.Click += copyAssociatedCodesToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator4
+            // 
+            toolStripSeparator4.Name = "toolStripSeparator4";
+            toolStripSeparator4.Size = new Size(427, 6);
+            // 
+            // showItemsWithSameZoneToolStripMenuItem
+            // 
+            showItemsWithSameZoneToolStripMenuItem.Name = "showItemsWithSameZoneToolStripMenuItem";
+            showItemsWithSameZoneToolStripMenuItem.ShortcutKeys = Keys.F4;
+            showItemsWithSameZoneToolStripMenuItem.Size = new Size(430, 38);
+            showItemsWithSameZoneToolStripMenuItem.Text = "&Show Items with Same Zone";
+            showItemsWithSameZoneToolStripMenuItem.Click += showItemsWithSameZoneToolStripMenuItem_Click;
             // 
             // saveFileDialog1
             // 
@@ -265,43 +275,86 @@
             // 
             statusStrip1.ImageScalingSize = new Size(32, 32);
             statusStrip1.Items.AddRange(new ToolStripItem[] { fileNameLabel, itemLengthLabel });
-            statusStrip1.Location = new Point(0, 1101);
+            statusStrip1.Location = new Point(0, 1081);
             statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(2292, 22);
+            statusStrip1.Size = new Size(2292, 42);
             statusStrip1.TabIndex = 2;
             statusStrip1.Text = "statusStrip1";
             // 
             // fileNameLabel
             // 
             fileNameLabel.Name = "fileNameLabel";
-            fileNameLabel.Size = new Size(0, 12);
+            fileNameLabel.Size = new Size(180, 32);
+            fileNameLabel.Text = "No File Loaded,";
             // 
             // itemLengthLabel
             // 
             itemLengthLabel.Name = "itemLengthLabel";
-            itemLengthLabel.Size = new Size(0, 12);
+            itemLengthLabel.Size = new Size(169, 32);
+            itemLengthLabel.Text = "0 Items Visible";
             // 
             // timer1
             // 
             timer1.Tick += timer1_Tick;
+            // 
+            // toolStrip1
+            // 
+            toolStrip1.ImageScalingSize = new Size(32, 32);
+            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripTextBox1, toolStripButton1 });
+            toolStrip1.Location = new Point(0, 44);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Size = new Size(2292, 42);
+            toolStrip1.TabIndex = 3;
+            toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripTextBox1
+            // 
+            toolStripTextBox1.Name = "toolStripTextBox1";
+            toolStripTextBox1.Size = new Size(100, 42);
+            toolStripTextBox1.ToolTipText = "Enter a full word or starting characters";
+            // 
+            // toolStripButton1
+            // 
+            toolStripButton1.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            toolStripButton1.Enabled = false;
+            toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
+            toolStripButton1.ImageTransparentColor = Color.Magenta;
+            toolStripButton1.Name = "toolStripButton1";
+            toolStripButton1.Size = new Size(121, 36);
+            toolStripButton1.Text = "Find &Next";
+            toolStripButton1.Click += toolStripButton1_Click;
+            // 
+            // listBox1
+            // 
+            listBox1.ContextMenuStrip = contextMenuStrip1;
+            listBox1.Dock = DockStyle.Fill;
+            listBox1.FormattingEnabled = true;
+            listBox1.Location = new Point(0, 86);
+            listBox1.Name = "listBox1";
+            listBox1.Size = new Size(2292, 995);
+            listBox1.TabIndex = 4;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(2292, 1123);
-            Controls.Add(statusStrip1);
             Controls.Add(listBox1);
+            Controls.Add(toolStrip1);
+            Controls.Add(statusStrip1);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;
             Margin = new Padding(6);
             Name = "Form1";
-            Text = "JSONist";
+            Text = "JSONist 1.1";
+            Load += Form1_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             contextMenuStrip1.ResumeLayout(false);
             statusStrip1.ResumeLayout(false);
             statusStrip1.PerformLayout();
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -311,12 +364,9 @@
         private MenuStrip menuStrip1;
         private ToolStripMenuItem fileToolStripMenuItem;
         private OpenFileDialog openFileDialog1;
-        private ListBox listBox1;
         private ToolStripMenuItem openToolStripMenuItem;
         private ToolStripMenuItem schemaToolStripMenuItem;
         private ToolStripMenuItem loadToolStripMenuItem;
-        private ToolStripMenuItem arraysToolStripMenuItem;
-        private ToolStripMenuItem codesToolStripMenuItem;
         private ToolStripMenuItem outputToolStripMenuItem;
         private ToolStripMenuItem clearToolStripMenuItem;
         private ToolStripMenuItem exportToTextFileToolStripMenuItem;
@@ -339,5 +389,13 @@
         private ToolStripMenuItem lINQQueryEditorToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator5;
         private ToolStripMenuItem copyAssociatedCodesToolStripMenuItem;
+        private ToolStrip toolStrip1;
+        private ToolStripTextBox toolStripTextBox1;
+        private ToolStripButton toolStripButton1;
+        private ListBox listBox1;
+        private ToolStripMenuItem toolStripMenuItem1;
+        private ToolStripMenuItem hasCodeToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator4;
+        private ToolStripMenuItem showItemsWithSameZoneToolStripMenuItem;
     }
 }

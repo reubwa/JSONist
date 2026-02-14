@@ -18,6 +18,11 @@ namespace JSONist
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            openFile();
+        }
+
+        public void openFile()
+        {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 this.Cursor = Cursors.WaitCursor;
@@ -31,9 +36,11 @@ namespace JSONist
                     {
                         if (res is null)
                         {
-                            MessageBox.Show("Null exception occured", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Null exception occured", "Error", MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
                             return;
                         }
+
                         var res2 = (JsonException)res;
                         MessageBox.Show(res2.Message);
                         return;
@@ -41,7 +48,8 @@ namespace JSONist
 
                     loadedFile = (TIPLOCSchemaProvider.Jfile)res;
                     fileNameLabel.Text = $"{openFileDialog1.FileName} loaded,";
-                    var msgResult = MessageBox.Show("Load names into the output area?", "Prompt", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    var msgResult = MessageBox.Show("Load names into the output area?", "Prompt",
+                        MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (msgResult == DialogResult.Yes)
                     {
                         loadNames();
@@ -53,35 +61,13 @@ namespace JSONist
                     MessageBox.Show(ioException.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+
             this.Cursor = Cursors.Default;
         }
 
         private void clearToolStripMenuItem_Click(object sender, EventArgs e)
         {
             listBox1.Items.Clear();
-        }
-
-        private void codesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (loadedFile == null || loadedFile.Tiplocs == null)
-            {
-                MessageBox.Show("No file loaded.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            this.Cursor = Cursors.WaitCursor;
-            listBox1.Items.Clear();
-            foreach (var tl in loadedFile.Tiplocs)
-            {
-                foreach (var code in tl.Codes)
-                {
-                    if (!listBox1.Items.Contains(code))
-                    {
-                        listBox1.Items.Add(code);
-                    }
-                }
-            }
-
-            this.Cursor = Cursors.Default;
         }
 
         private void exportToTextFileToolStripMenuItem_Click(object sender, EventArgs e)
@@ -91,6 +77,7 @@ namespace JSONist
                 MessageBox.Show("No file loaded.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
             saveFileDialog1.Filter = "Text Files (*.txt)|*.txt";
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -110,6 +97,7 @@ namespace JSONist
                 MessageBox.Show("No file loaded.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
             this.Cursor = Cursors.WaitCursor;
             listBox1.Items.Clear();
             foreach (var tl in loadedFile.Tiplocs)
@@ -119,6 +107,7 @@ namespace JSONist
                     listBox1.Items.Add(tl.Name);
                 }
             }
+
             this.Cursor = Cursors.Default;
         }
 
@@ -129,6 +118,7 @@ namespace JSONist
                 MessageBox.Show("No file loaded.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
             var fmd = new FindMatchesDlg();
             fmd.ShowDialog();
             if (fmd.DialogResult != DialogResult.OK)
@@ -136,11 +126,14 @@ namespace JSONist
                 return;
             }
 
+            this.Cursor = Cursors.WaitCursor;
             var res = fmd.SelectedData;
             var selection = res.Key;
-            switch (selection)
+            try
             {
-                case "Stanox":
+                switch (selection)
+                {
+                    case "Stanox":
                     {
                         listBox1.Items.Clear();
                         foreach (var tl in loadedFile.Tiplocs)
@@ -150,6 +143,7 @@ namespace JSONist
                                 listBox1.Items.Add(tl.Name);
                             }
                         }
+
                         if (listBox1.Items.Count == 0)
                         {
                             MessageBox.Show("No matches found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -157,7 +151,7 @@ namespace JSONist
 
                         return;
                     }
-                case "CRS":
+                    case "CRS":
                     {
                         listBox1.Items.Clear();
                         foreach (var tl in loadedFile.Tiplocs)
@@ -167,6 +161,7 @@ namespace JSONist
                                 listBox1.Items.Add(tl.Name);
                             }
                         }
+
                         if (listBox1.Items.Count == 0)
                         {
                             MessageBox.Show("No matches found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -174,7 +169,7 @@ namespace JSONist
 
                         return;
                     }
-                case "Nalco":
+                    case "Nalco":
                     {
                         listBox1.Items.Clear();
                         foreach (var tl in loadedFile.Tiplocs)
@@ -184,6 +179,7 @@ namespace JSONist
                                 listBox1.Items.Add(tl.Name);
                             }
                         }
+
                         if (listBox1.Items.Count == 0)
                         {
                             MessageBox.Show("No matches found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -191,7 +187,7 @@ namespace JSONist
 
                         return;
                     }
-                case "UIC":
+                    case "UIC":
                     {
                         listBox1.Items.Clear();
                         foreach (var tl in loadedFile.Tiplocs)
@@ -201,6 +197,7 @@ namespace JSONist
                                 listBox1.Items.Add(tl.Name);
                             }
                         }
+
                         if (listBox1.Items.Count == 0)
                         {
                             MessageBox.Show("No matches found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -208,7 +205,7 @@ namespace JSONist
 
                         return;
                     }
-                case "Zone":
+                    case "Zone":
                     {
                         listBox1.Items.Clear();
                         foreach (var tl in loadedFile.Tiplocs)
@@ -218,6 +215,7 @@ namespace JSONist
                                 listBox1.Items.Add(tl.Name);
                             }
                         }
+
                         if (listBox1.Items.Count == 0)
                         {
                             MessageBox.Show("No matches found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -225,7 +223,7 @@ namespace JSONist
 
                         return;
                     }
-                case "BPlan_TimingPoint":
+                    case "BPlan_TimingPoint":
                     {
                         listBox1.Items.Clear();
                         var choice = TIPLOCSchemaProvider.ConvertToBPlan_TimingPoint((string)res.Value);
@@ -236,13 +234,15 @@ namespace JSONist
                                 listBox1.Items.Add(tl.Name);
                             }
                         }
+
                         if (listBox1.Items.Count == 0)
                         {
                             MessageBox.Show("No matches found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
+
                         return;
                     }
-                case "TPS_StationType":
+                    case "TPS_StationType":
                     {
                         listBox1.Items.Clear();
                         var choice = TIPLOCSchemaProvider.ConvertToTPS_StationType((string)res.Value);
@@ -253,13 +253,15 @@ namespace JSONist
                                 listBox1.Items.Add(tl.Name);
                             }
                         }
+
                         if (listBox1.Items.Count == 0)
                         {
                             MessageBox.Show("No matches found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
+
                         return;
                     }
-                case "TPS_StationCategory":
+                    case "TPS_StationCategory":
                     {
                         listBox1.Items.Clear();
                         var choice = TIPLOCSchemaProvider.ConvertToTPS_StationCategory((string)res.Value);
@@ -270,13 +272,15 @@ namespace JSONist
                                 listBox1.Items.Add(tl.Name);
                             }
                         }
+
                         if (listBox1.Items.Count == 0)
                         {
                             MessageBox.Show("No matches found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
+
                         return;
                     }
-                case "ForceLPB":
+                    case "ForceLPB":
                     {
                         listBox1.Items.Clear();
                         var choice = TIPLOCSchemaProvider.ConvertToForceLPB((string)res.Value);
@@ -287,18 +291,31 @@ namespace JSONist
                                 listBox1.Items.Add(tl.Name);
                             }
                         }
+
                         if (listBox1.Items.Count == 0)
                         {
                             MessageBox.Show("No matches found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
+
                         return;
                     }
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw;
+            }
+            finally
+            {
+                this.Cursor = Cursors.Default;
             }
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             itemLengthLabel.Text = $"{listBox1.Items.Count} items visible";
+            toolStripButton1.Enabled = toolStripTextBox1.Text != "";
         }
 
         private void alphabeticallyToolStripMenuItem_Click(object sender, EventArgs e)
@@ -322,13 +339,16 @@ namespace JSONist
                 MessageBox.Show("No file loaded.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
             if (listBox1.SelectedIndex != -1)
             {
                 foreach (var tl in loadedFile.Tiplocs)
                 {
                     if (tl.Name == (string)listBox1.SelectedItem)
                     {
-                        MessageBox.Show($"TIPLOC: {tl.Tiploc}\n Stanox: {tl.Stanox}\n InBPlan: {tl.InBPlan}\n InTPS: {tl.InTPS}\n IsTIPLOC: {tl.IsTiploc}\n Latitude: {tl.Latitude}\n Longitude: {tl.Longitude}\n BPlan_TimingPoint: {tl.Details.BPlan_TimingPoint}\n TPS_StationType: {tl.Details.TPS_StationType}\n TPS_StationCategory: {tl.Details.TPS_StationCategory}\n CRS: {tl.Details.CRS}\n Nalco: {tl.Details.Nalco}\n Off Network: {tl.Details.OffNetwork}\n ForceLPB: {tl.Details.ForceLPB}\n Compulsory Stop: {tl.Details.CompulsoryStop}\n UIC: {tl.Details.UIC}\n Zone: {tl.Details.Zone}", $"Inspecting: {tl.Name}");
+                        MessageBox.Show(
+                            $"TIPLOC: {tl.Tiploc}\n Stanox: {tl.Stanox}\n InBPlan: {tl.InBPlan}\n InTPS: {tl.InTPS}\n IsTIPLOC: {tl.IsTiploc}\n Latitude: {tl.Latitude}\n Longitude: {tl.Longitude}\n BPlan_TimingPoint: {tl.Details.BPlan_TimingPoint}\n TPS_StationType: {tl.Details.TPS_StationType}\n TPS_StationCategory: {tl.Details.TPS_StationCategory}\n CRS: {tl.Details.CRS}\n Nalco: {tl.Details.Nalco}\n Off Network: {tl.Details.OffNetwork}\n ForceLPB: {tl.Details.ForceLPB}\n Compulsory Stop: {tl.Details.CompulsoryStop}\n UIC: {tl.Details.UIC}\n Zone: {tl.Details.Zone}",
+                            $"Inspecting: {tl.Name}");
                     }
                 }
             }
@@ -341,6 +361,7 @@ namespace JSONist
                 MessageBox.Show("No file loaded.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
             if (listBox1.SelectedIndex != -1)
             {
                 string codes = "";
@@ -352,6 +373,7 @@ namespace JSONist
                         {
                             codes += $"{code}\n";
                         }
+
                         MessageBox.Show(codes, $"Codes Associated with {tl.Name}");
                     }
                 }
@@ -365,7 +387,9 @@ namespace JSONist
                 MessageBox.Show("No file loaded.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            string input = Interaction.InputBox("Enter a value (exactly as it is displayed in the output area)", "Jump To");
+
+            string input = Interaction.InputBox("Enter a value (exactly as it is displayed in the output area)",
+                "Jump To");
             if (string.IsNullOrEmpty(input)) return;
             if (listBox1.Items.Contains(input))
             {
@@ -385,6 +409,7 @@ namespace JSONist
                 MessageBox.Show("Please load a file first.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
             var lqe = new LINQQueryEditor();
             await lqe.ShowDialogAsync();
             if (lqe.DialogResult != DialogResult.OK) return;
@@ -422,7 +447,8 @@ namespace JSONist
             }
             catch (CompilationErrorException compileEx)
             {
-                MessageBox.Show($"Query Error:\n{string.Join("\n", compileEx.Diagnostics)}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Query Error:\n{string.Join("\n", compileEx.Diagnostics)}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
@@ -439,6 +465,7 @@ namespace JSONist
                 MessageBox.Show("No file loaded.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
             if (listBox1.SelectedIndex != -1)
             {
                 string codes = "";
@@ -455,6 +482,122 @@ namespace JSONist
                     }
                 }
             }
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            string searchText = toolStripTextBox1.Text;
+            int startIndex = listBox1.SelectedIndex;
+
+            int index = listBox1.FindString(searchText, startIndex);
+
+            if (index != -1 && index != startIndex)
+            {
+                listBox1.SelectedIndex = index;
+            }
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (loadedFile == null || loadedFile.Tiplocs == null)
+            {
+                MessageBox.Show("No file loaded.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            this.Cursor = Cursors.WaitCursor;
+            listBox1.Items.Clear();
+            foreach (var tl in loadedFile.Tiplocs)
+            {
+                foreach (var code in tl.Codes)
+                {
+                    if (!listBox1.Items.Contains(code))
+                    {
+                        listBox1.Items.Add(code);
+                    }
+                }
+            }
+
+            this.Cursor = Cursors.Default;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            var res = MessageBox.Show("Would you like to open a file?", "Prompt", MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+            if (res != DialogResult.Yes)
+            {
+                return;
+            }
+
+            openFile();
+        }
+
+        private void hasCodeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (loadedFile == null || loadedFile.Tiplocs == null)
+            {
+                MessageBox.Show("No file loaded.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            string input = Interaction.InputBox("Enter a code", "Has Code");
+            if (string.IsNullOrEmpty(input)) return;
+            this.Cursor = Cursors.WaitCursor;
+            listBox1.Items.Clear();
+            foreach (var tl in loadedFile.Tiplocs)
+            {
+                if (tl.Codes.Contains(input) && !listBox1.Items.Contains(tl.Name))
+                {
+                    listBox1.Items.Add(tl.Name);
+                }
+            }
+
+            this.Cursor = Cursors.Default;
+        }
+
+        private void showItemsWithSameZoneToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (loadedFile == null || loadedFile.Tiplocs == null)
+            {
+                MessageBox.Show("No file loaded.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            this.Cursor = Cursors.WaitCursor;
+            int zone = 0;
+            if (listBox1.SelectedIndex != -1)
+            {
+                string codes = "";
+                foreach (var tl in loadedFile.Tiplocs)
+                {
+                    if (tl.Name == (string)listBox1.SelectedItem)
+                    {
+                        if (tl.Details.Zone is not null)
+                        {
+                            zone = (int)tl.Details.Zone;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Zone is null", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            this.Cursor = Cursors.Default;
+                            return;
+                        }
+
+                        break;
+                    }
+                }
+                listBox1.Items.Clear();
+                foreach (var tl in loadedFile.Tiplocs)
+                {
+                    if (tl.Details.Zone == zone)
+                    {
+                        listBox1.Items.Add(tl.Name);
+                    }
+                }
+            }
+
+            this.Cursor = Cursors.Default;
         }
     }
 }
