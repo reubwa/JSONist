@@ -1,6 +1,8 @@
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
 using Microsoft.VisualBasic;
+using System;
+using System.Security.Policy;
 using System.Text.Json;
 
 namespace JSONist
@@ -134,171 +136,171 @@ namespace JSONist
                 switch (selection)
                 {
                     case "Stanox":
-                    {
-                        listBox1.Items.Clear();
-                        foreach (var tl in loadedFile.Tiplocs)
                         {
-                            if (tl.Stanox == (res.Value is null ? null : int.Parse((String)res.Value)))
+                            listBox1.Items.Clear();
+                            foreach (var tl in loadedFile.Tiplocs)
                             {
-                                listBox1.Items.Add(tl.Name);
+                                if (tl.Stanox == (res.Value is null ? null : int.Parse((String)res.Value)))
+                                {
+                                    listBox1.Items.Add(tl.Name);
+                                }
                             }
-                        }
 
-                        if (listBox1.Items.Count == 0)
-                        {
-                            MessageBox.Show("No matches found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                            if (listBox1.Items.Count == 0)
+                            {
+                                MessageBox.Show("No matches found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
 
-                        return;
-                    }
+                            return;
+                        }
                     case "CRS":
-                    {
-                        listBox1.Items.Clear();
-                        foreach (var tl in loadedFile.Tiplocs)
                         {
-                            if (tl.Details.CRS == (string?)res.Value)
+                            listBox1.Items.Clear();
+                            foreach (var tl in loadedFile.Tiplocs)
                             {
-                                listBox1.Items.Add(tl.Name);
+                                if (tl.Details.CRS == (string?)res.Value)
+                                {
+                                    listBox1.Items.Add(tl.Name);
+                                }
                             }
-                        }
 
-                        if (listBox1.Items.Count == 0)
-                        {
-                            MessageBox.Show("No matches found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                            if (listBox1.Items.Count == 0)
+                            {
+                                MessageBox.Show("No matches found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
 
-                        return;
-                    }
+                            return;
+                        }
                     case "Nalco":
-                    {
-                        listBox1.Items.Clear();
-                        foreach (var tl in loadedFile.Tiplocs)
                         {
-                            if (tl.Details.Nalco == (res.Value is null ? null : int.Parse((String)res.Value)))
+                            listBox1.Items.Clear();
+                            foreach (var tl in loadedFile.Tiplocs)
                             {
-                                listBox1.Items.Add(tl.Name);
+                                if (tl.Details.Nalco == (res.Value is null ? null : int.Parse((String)res.Value)))
+                                {
+                                    listBox1.Items.Add(tl.Name);
+                                }
                             }
-                        }
 
-                        if (listBox1.Items.Count == 0)
-                        {
-                            MessageBox.Show("No matches found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                            if (listBox1.Items.Count == 0)
+                            {
+                                MessageBox.Show("No matches found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
 
-                        return;
-                    }
+                            return;
+                        }
                     case "UIC":
-                    {
-                        listBox1.Items.Clear();
-                        foreach (var tl in loadedFile.Tiplocs)
                         {
-                            if (tl.Details.UIC == (res.Value is null ? null : int.Parse((String)res.Value)))
+                            listBox1.Items.Clear();
+                            foreach (var tl in loadedFile.Tiplocs)
                             {
-                                listBox1.Items.Add(tl.Name);
+                                if (tl.Details.UIC == (res.Value is null ? null : int.Parse((String)res.Value)))
+                                {
+                                    listBox1.Items.Add(tl.Name);
+                                }
                             }
-                        }
 
-                        if (listBox1.Items.Count == 0)
-                        {
-                            MessageBox.Show("No matches found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                            if (listBox1.Items.Count == 0)
+                            {
+                                MessageBox.Show("No matches found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
 
-                        return;
-                    }
+                            return;
+                        }
                     case "Zone":
-                    {
-                        listBox1.Items.Clear();
-                        foreach (var tl in loadedFile.Tiplocs)
                         {
-                            if (tl.Details.Zone == (res.Value is null ? null : int.Parse((String)res.Value)))
+                            listBox1.Items.Clear();
+                            foreach (var tl in loadedFile.Tiplocs)
                             {
-                                listBox1.Items.Add(tl.Name);
+                                if (tl.Details.Zone == (res.Value is null ? null : int.Parse((String)res.Value)))
+                                {
+                                    listBox1.Items.Add(tl.Name);
+                                }
                             }
-                        }
 
-                        if (listBox1.Items.Count == 0)
-                        {
-                            MessageBox.Show("No matches found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                            if (listBox1.Items.Count == 0)
+                            {
+                                MessageBox.Show("No matches found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
 
-                        return;
-                    }
+                            return;
+                        }
                     case "BPlan_TimingPoint":
-                    {
-                        listBox1.Items.Clear();
-                        var choice = TIPLOCSchemaProvider.ConvertToBPlan_TimingPoint((string)res.Value);
-                        foreach (var tl in loadedFile.Tiplocs)
                         {
-                            if (tl.Details.BPlan_TimingPoint == choice)
+                            listBox1.Items.Clear();
+                            var choice = TIPLOCSchemaProvider.ConvertToBPlan_TimingPoint((string)res.Value);
+                            foreach (var tl in loadedFile.Tiplocs)
                             {
-                                listBox1.Items.Add(tl.Name);
+                                if (tl.Details.BPlan_TimingPoint == choice)
+                                {
+                                    listBox1.Items.Add(tl.Name);
+                                }
                             }
-                        }
 
-                        if (listBox1.Items.Count == 0)
-                        {
-                            MessageBox.Show("No matches found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                            if (listBox1.Items.Count == 0)
+                            {
+                                MessageBox.Show("No matches found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
 
-                        return;
-                    }
+                            return;
+                        }
                     case "TPS_StationType":
-                    {
-                        listBox1.Items.Clear();
-                        var choice = TIPLOCSchemaProvider.ConvertToTPS_StationType((string)res.Value);
-                        foreach (var tl in loadedFile.Tiplocs)
                         {
-                            if (tl.Details.TPS_StationType == choice)
+                            listBox1.Items.Clear();
+                            var choice = TIPLOCSchemaProvider.ConvertToTPS_StationType((string)res.Value);
+                            foreach (var tl in loadedFile.Tiplocs)
                             {
-                                listBox1.Items.Add(tl.Name);
+                                if (tl.Details.TPS_StationType == choice)
+                                {
+                                    listBox1.Items.Add(tl.Name);
+                                }
                             }
-                        }
 
-                        if (listBox1.Items.Count == 0)
-                        {
-                            MessageBox.Show("No matches found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                            if (listBox1.Items.Count == 0)
+                            {
+                                MessageBox.Show("No matches found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
 
-                        return;
-                    }
+                            return;
+                        }
                     case "TPS_StationCategory":
-                    {
-                        listBox1.Items.Clear();
-                        var choice = TIPLOCSchemaProvider.ConvertToTPS_StationCategory((string)res.Value);
-                        foreach (var tl in loadedFile.Tiplocs)
                         {
-                            if (tl.Details.TPS_StationCategory == choice)
+                            listBox1.Items.Clear();
+                            var choice = TIPLOCSchemaProvider.ConvertToTPS_StationCategory((string)res.Value);
+                            foreach (var tl in loadedFile.Tiplocs)
                             {
-                                listBox1.Items.Add(tl.Name);
+                                if (tl.Details.TPS_StationCategory == choice)
+                                {
+                                    listBox1.Items.Add(tl.Name);
+                                }
                             }
-                        }
 
-                        if (listBox1.Items.Count == 0)
-                        {
-                            MessageBox.Show("No matches found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                            if (listBox1.Items.Count == 0)
+                            {
+                                MessageBox.Show("No matches found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
 
-                        return;
-                    }
+                            return;
+                        }
                     case "ForceLPB":
-                    {
-                        listBox1.Items.Clear();
-                        var choice = TIPLOCSchemaProvider.ConvertToForceLPB((string)res.Value);
-                        foreach (var tl in loadedFile.Tiplocs)
                         {
-                            if (tl.Details.ForceLPB == choice)
+                            listBox1.Items.Clear();
+                            var choice = TIPLOCSchemaProvider.ConvertToForceLPB((string)res.Value);
+                            foreach (var tl in loadedFile.Tiplocs)
                             {
-                                listBox1.Items.Add(tl.Name);
+                                if (tl.Details.ForceLPB == choice)
+                                {
+                                    listBox1.Items.Add(tl.Name);
+                                }
                             }
-                        }
 
-                        if (listBox1.Items.Count == 0)
-                        {
-                            MessageBox.Show("No matches found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                            if (listBox1.Items.Count == 0)
+                            {
+                                MessageBox.Show("No matches found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
 
-                        return;
-                    }
+                            return;
+                        }
                 }
             }
             catch (Exception exception)
@@ -594,6 +596,46 @@ namespace JSONist
                     {
                         listBox1.Items.Add(tl.Name);
                     }
+                }
+            }
+
+            this.Cursor = Cursors.Default;
+        }
+
+        private void bySTANOXAreaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (loadedFile == null || loadedFile.Tiplocs == null)
+            {
+                MessageBox.Show("No file loaded.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            this.Cursor = Cursors.WaitCursor;
+            string input = Interaction.InputBox("Enter a number between 00 and 89 (e.g. 02)", "Enter STANOX prefix");
+            int conv = 0;
+            try
+            {
+                conv = int.Parse(input);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show($"{exception.Message} - please ensure your input is a number ONLY!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Cursor = Cursors.Default;
+                return;
+            }
+
+            if (conv < 00 || conv > 89)
+            {
+                MessageBox.Show("Please ensure your input is between 00 and 89!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.Cursor = Cursors.Default;
+                return;
+            }
+            listBox1.Items.Clear();
+            foreach (var tl in loadedFile.Tiplocs)
+            {
+                if (tl.Stanox is not null && tl.Stanox.ToString().StartsWith(conv.ToString()))
+                {
+                    listBox1.Items.Add(tl.Name);
                 }
             }
 

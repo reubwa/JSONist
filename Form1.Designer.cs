@@ -41,6 +41,8 @@
             toolStripSeparator3 = new ToolStripSeparator();
             findMatchesToolStripMenuItem = new ToolStripMenuItem();
             hasCodeToolStripMenuItem = new ToolStripMenuItem();
+            toolStripSeparator6 = new ToolStripSeparator();
+            bySTANOXAreaToolStripMenuItem = new ToolStripMenuItem();
             sortToolStripMenuItem = new ToolStripMenuItem();
             alphabeticallyToolStripMenuItem = new ToolStripMenuItem();
             outputToolStripMenuItem = new ToolStripMenuItem();
@@ -100,7 +102,7 @@
             // 
             // schemaToolStripMenuItem
             // 
-            schemaToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { loadToolStripMenuItem, toolStripSeparator3, findMatchesToolStripMenuItem, hasCodeToolStripMenuItem });
+            schemaToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { loadToolStripMenuItem, toolStripSeparator3, findMatchesToolStripMenuItem, hasCodeToolStripMenuItem, toolStripSeparator6, bySTANOXAreaToolStripMenuItem });
             schemaToolStripMenuItem.Name = "schemaToolStripMenuItem";
             schemaToolStripMenuItem.Size = new Size(87, 36);
             schemaToolStripMenuItem.Text = "&Filter";
@@ -109,40 +111,40 @@
             // 
             loadToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { toolStripMenuItem1, toolStripSeparator2, nameToolStripMenuItem });
             loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            loadToolStripMenuItem.Size = new Size(369, 44);
+            loadToolStripMenuItem.Size = new Size(405, 44);
             loadToolStripMenuItem.Text = "&Load";
             // 
             // toolStripMenuItem1
             // 
             toolStripMenuItem1.Name = "toolStripMenuItem1";
             toolStripMenuItem1.ShortcutKeys = Keys.Control | Keys.Alt | Keys.C;
-            toolStripMenuItem1.Size = new Size(341, 44);
+            toolStripMenuItem1.Size = new Size(359, 44);
             toolStripMenuItem1.Text = "&Codes";
             toolStripMenuItem1.Click += toolStripMenuItem1_Click;
             // 
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(338, 6);
+            toolStripSeparator2.Size = new Size(356, 6);
             // 
             // nameToolStripMenuItem
             // 
             nameToolStripMenuItem.Name = "nameToolStripMenuItem";
             nameToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Alt | Keys.N;
-            nameToolStripMenuItem.Size = new Size(341, 44);
+            nameToolStripMenuItem.Size = new Size(359, 44);
             nameToolStripMenuItem.Text = "&Name";
             nameToolStripMenuItem.Click += nameToolStripMenuItem_Click;
             // 
             // toolStripSeparator3
             // 
             toolStripSeparator3.Name = "toolStripSeparator3";
-            toolStripSeparator3.Size = new Size(366, 6);
+            toolStripSeparator3.Size = new Size(402, 6);
             // 
             // findMatchesToolStripMenuItem
             // 
             findMatchesToolStripMenuItem.Name = "findMatchesToolStripMenuItem";
             findMatchesToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.F;
-            findMatchesToolStripMenuItem.Size = new Size(369, 44);
+            findMatchesToolStripMenuItem.Size = new Size(405, 44);
             findMatchesToolStripMenuItem.Text = "&Find Matches";
             findMatchesToolStripMenuItem.Click += findMatchesToolStripMenuItem_Click;
             // 
@@ -150,9 +152,22 @@
             // 
             hasCodeToolStripMenuItem.Name = "hasCodeToolStripMenuItem";
             hasCodeToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.H;
-            hasCodeToolStripMenuItem.Size = new Size(369, 44);
+            hasCodeToolStripMenuItem.Size = new Size(405, 44);
             hasCodeToolStripMenuItem.Text = "&Has Code";
             hasCodeToolStripMenuItem.Click += hasCodeToolStripMenuItem_Click;
+            // 
+            // toolStripSeparator6
+            // 
+            toolStripSeparator6.Name = "toolStripSeparator6";
+            toolStripSeparator6.Size = new Size(402, 6);
+            // 
+            // bySTANOXAreaToolStripMenuItem
+            // 
+            bySTANOXAreaToolStripMenuItem.Name = "bySTANOXAreaToolStripMenuItem";
+            bySTANOXAreaToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.A;
+            bySTANOXAreaToolStripMenuItem.Size = new Size(405, 44);
+            bySTANOXAreaToolStripMenuItem.Text = "&By STANOX Area";
+            bySTANOXAreaToolStripMenuItem.Click += bySTANOXAreaToolStripMenuItem_Click;
             // 
             // sortToolStripMenuItem
             // 
@@ -397,5 +412,7 @@
         private ToolStripMenuItem hasCodeToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator4;
         private ToolStripMenuItem showItemsWithSameZoneToolStripMenuItem;
+        private ToolStripSeparator toolStripSeparator6;
+        private ToolStripMenuItem bySTANOXAreaToolStripMenuItem;
     }
 }
