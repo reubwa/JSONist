@@ -118,20 +118,20 @@
             // 
             toolStripMenuItem1.Name = "toolStripMenuItem1";
             toolStripMenuItem1.ShortcutKeys = Keys.Control | Keys.Alt | Keys.C;
-            toolStripMenuItem1.Size = new Size(359, 44);
+            toolStripMenuItem1.Size = new Size(341, 44);
             toolStripMenuItem1.Text = "&Codes";
             toolStripMenuItem1.Click += toolStripMenuItem1_Click;
             // 
             // toolStripSeparator2
             // 
             toolStripSeparator2.Name = "toolStripSeparator2";
-            toolStripSeparator2.Size = new Size(356, 6);
+            toolStripSeparator2.Size = new Size(338, 6);
             // 
             // nameToolStripMenuItem
             // 
             nameToolStripMenuItem.Name = "nameToolStripMenuItem";
             nameToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Alt | Keys.N;
-            nameToolStripMenuItem.Size = new Size(359, 44);
+            nameToolStripMenuItem.Size = new Size(341, 44);
             nameToolStripMenuItem.Text = "&Name";
             nameToolStripMenuItem.Click += nameToolStripMenuItem_Click;
             // 
@@ -361,7 +361,7 @@
             MainMenuStrip = menuStrip1;
             Margin = new Padding(6);
             Name = "Form1";
-            Text = "JSONist 1.1";
+            Text = "JSONist 1.1.1";
             Load += Form1_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
