@@ -1,8 +1,6 @@
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
 using Microsoft.VisualBasic;
-using System;
-using System.Security.Policy;
 using System.Text.Json;
 
 namespace JSONist
@@ -17,6 +15,8 @@ namespace JSONist
         }
 
         public static TIPLOCSchemaProvider.Jfile loadedFile;
+
+        public static Dictionary<string,string> codebook;
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -507,20 +507,8 @@ namespace JSONist
                 return;
             }
 
-            this.Cursor = Cursors.WaitCursor;
-            listBox1.Items.Clear();
-            foreach (var tl in loadedFile.Tiplocs)
-            {
-                foreach (var code in tl.Codes)
-                {
-                    if (!listBox1.Items.Contains(code))
-                    {
-                        listBox1.Items.Add(code);
-                    }
-                }
-            }
-
-            this.Cursor = Cursors.Default;
+            var cvd = new CodesViewer();
+            cvd.Show();
         }
 
         private void Form1_Load(object sender, EventArgs e)
