@@ -33,6 +33,7 @@
             toolStrip1 = new ToolStrip();
             toolStripButton1 = new ToolStripButton();
             toolStripButton2 = new ToolStripButton();
+            toolStripButton5 = new ToolStripButton();
             toolStripSeparator1 = new ToolStripSeparator();
             toolStripDropDownButton1 = new ToolStripDropDownButton();
             importToolStripMenuItem = new ToolStripMenuItem();
@@ -53,6 +54,7 @@
             viewValueToolStripMenuItem = new ToolStripMenuItem();
             removeValueToolStripMenuItem = new ToolStripMenuItem();
             timer1 = new System.Windows.Forms.Timer(components);
+            saveFileDialog1 = new SaveFileDialog();
             toolStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -68,7 +70,7 @@
             // toolStrip1
             // 
             toolStrip1.ImageScalingSize = new Size(32, 32);
-            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton1, toolStripButton2, toolStripSeparator1, toolStripDropDownButton1, toolStripButton3, toolStripButton4 });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton1, toolStripButton2, toolStripButton5, toolStripSeparator1, toolStripDropDownButton1, toolStripButton3, toolStripButton4 });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(1178, 42);
@@ -94,6 +96,16 @@
             toolStripButton2.Size = new Size(158, 36);
             toolStripButton2.Text = "Reset Output";
             toolStripButton2.Click += toolStripButton2_Click;
+            // 
+            // toolStripButton5
+            // 
+            toolStripButton5.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            toolStripButton5.Image = (Image)resources.GetObject("toolStripButton5.Image");
+            toolStripButton5.ImageTransparentColor = Color.Magenta;
+            toolStripButton5.Name = "toolStripButton5";
+            toolStripButton5.Size = new Size(168, 36);
+            toolStripButton5.Text = "Export Output";
+            toolStripButton5.Click += toolStripButton5_Click;
             // 
             // toolStripSeparator1
             // 
@@ -271,6 +283,10 @@
             // 
             timer1.Tick += timer1_Tick;
             // 
+            // saveFileDialog1
+            // 
+            saveFileDialog1.Title = "Export Output";
+            // 
             // CodesViewer
             // 
             AutoScaleDimensions = new SizeF(13F, 32F);
@@ -325,5 +341,7 @@
         private ToolStripMenuItem assignValueToolStripMenuItem;
         private ToolStripMenuItem viewValueToolStripMenuItem;
         private ToolStripMenuItem removeValueToolStripMenuItem;
+        private ToolStripButton toolStripButton5;
+        private SaveFileDialog saveFileDialog1;
     }
 }

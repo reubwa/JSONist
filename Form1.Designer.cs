@@ -361,7 +361,7 @@
             MainMenuStrip = menuStrip1;
             Margin = new Padding(6);
             Name = "Form1";
-            Text = "JSONist 1.2";
+            Text = "JSONist 1.2.1";
             Load += Form1_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();

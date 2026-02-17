@@ -200,5 +200,14 @@ namespace JSONist
                 Form1.codebook.Remove((string)listBox1.SelectedItem);
             }
         }
+
+        private void toolStripButton5_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.Filter = "Text Files (*.txt)|*.txt";
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                File.WriteAllLines(saveFileDialog1.FileName, listBox1.Items.Cast<string>());
+            }
+        }
     }
 }
