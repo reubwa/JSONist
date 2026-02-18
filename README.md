@@ -1,5 +1,5 @@
 # JSONist
-Simple analysis tool for Network Rail Tiplocs ([Start Here](https://railmap.azurewebsites.net/Downloads))
+Simple analysis tool for Network Rail Tiplocs ([Start Here](https://railmap.azurewebsites.net/Downloads), [download installer here](https://github.com/reubwa/JSONist/releases/latest))
 
 ![Screenshot](Screenshot_2026-02-13_182355.png)
 
